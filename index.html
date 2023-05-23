@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>TMDB Image API</title>
+</head>
+<body>
+	<script>
+		function getImage(imagePath) {
+			var url = "https://image.tmdb.org/t/p/w400/" + imagePath;
+			return fetch(url).then(response => response.blob());
+		}
+	</script>
+</body>
+</html>
