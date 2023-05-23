@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>TMDB Image API</title>
+	<title>TMDb Image API</title>
 </head>
 <body>
 	<script>
 		function getImage(imagePath) {
-			var url = "https://image.tmdb.org/t/p/w400/" + imagePath;
+			var url = "https://image.tmdb.org/t/p/w500/" + imagePath;
 			return fetch(url).then(response => response.blob());
 		}
 	</script>
