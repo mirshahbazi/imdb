@@ -1,5 +1,45 @@
 <!DOCTYPE html>
 <html>
+
+<head>
+    <title>TMDb Image API Example</title>
+</head>
+
+<body>
+    <div id="image-container"></div>
+
+    <script>
+        var urlParams = new URLSearchParams(window.location.search);
+        var imagePath = urlParams.get('imagePath');
+        console.info('imagePath', imagePath);
+
+        async function getImage(imagePath) {
+            var url = "https://image.tmdb.org/t/p/w500/" + imagePath;
+            try {
+                var response = await fetch(url);
+                if (response.ok) {
+                    console.info('success get image', response.status);
+                    var image = document.createElement("img");
+                    image.src = URL.createObjectURL(await response.blob());
+                    document.getElementById("image-container").appendChild(image);
+                } else {
+                    console.error('HTTP error:', response.status);
+                }
+            } catch (error) {
+                console.error('Error fetching image:', error);
+                return null;
+            }
+        }
+
+        getImage(imagePath);
+    </script>
+</body>
+
+</html>
+
+
+<!-- <!DOCTYPE html>
+<html>
 <head>
 	<title>TMDb Image API Example</title>
 </head>
@@ -7,10 +47,17 @@
 	<div id="image-container"></div>
 
 	<script>
+        var urlParams = new URLSearchParams(window.location.search);
+		var imagePath = urlParams.get('imagePath');
+        console.info('imagePath', imagePath);
 		function getImage(imagePath) {
 			var url = "https://image.tmdb.org/t/p/w500/" + imagePath;
 			return fetch(url).then(response => {
 				if (response.ok) {
+                    console.info('success get image', response.status);
+                    var image = document.createElement("img");
+			        image.src = URL.createObjectURL(blob);
+			        document.getElementById("image-container").appendChild(image);
 					return response.blob();
 				} else {
 					console.error('HTTP error:', response.status);
@@ -22,17 +69,16 @@
 			});
 		}
 
-		var urlParams = new URLSearchParams(window.location.search);
-		var imagePath = urlParams.get('imagePath');
+		
 
-		getImage(imagePath).then(blob => {
-			var image = document.createElement("img");
-			image.src = URL.createObjectURL(blob);
-			document.getElementById("image-container").appendChild(image);
-		});
+		// getImage(imagePath).then(blob => {
+			// var image = document.createElement("img");
+			// image.src = URL.createObjectURL(blob);
+			// document.getElementById("image-container").appendChild(image);
+		// });
 	</script>
 </body>
-</html>
+</html> -->
 
 
 <!-- <!DOCTYPE html>
